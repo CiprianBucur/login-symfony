@@ -34,7 +34,17 @@ class DefaultController extends Controller
     * @Route("/ascuns", name="adminAscuns")
 	*/
 	public function ascunsAction() {
-		return new Response('<html><body>Foarte bine!</body></html>');
+
+		if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			return new Response('<html><body>Foarte bine!</body></html>');
+		}
+		elseif ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+			return new Response('<html><body>Cookie - trebuie sa reincerci</body></html>');
+		}
+        throw $this->createAccessDeniedException();
+
+//		return new Response('<html><body>bau-bau</body></html>');
+		
 	}
 
 	/**
