@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
 
+
+
+
+
+{#
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 		<p>Hi there: {{ app.user.username }}</p>
 		<a href="/logout">Logout</a>
@@ -11,14 +15,17 @@
 
 	{% if is_granted('ROLE_ADMIN') %}
 		<hr>
-		<a href="ascuns">pagina ascunsa</a>
+		<a href="/ascuns">pagina ascunsa</a>
 	{% endif %}
 	{% if is_granted('ROLE_USER') %}
 		<hr>
 		<p><a href="/user">User page</a></p>
 		<p><a href="/admin">Admin page</a></p>
 	{% endif %}
-{% endblock %}
+#}
+
+
+
 
 {% block stylesheets %}
 {{ parent() }}
