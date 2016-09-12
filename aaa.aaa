@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites>
-  <testsuite name="Project Test Suite" tests="1" assertions="2" failures="0" errors="0" time="0.440009">
-    <testsuite name="Tests\AppBundle\Controller\DefaultControllerTest" file="C:\Users\P3700559\Desktop\Firebase\Symfony\login\tests\AppBundle\Controller\DefaultControllerTest.php" tests="1" assertions="2" failures="0" errors="0" time="0.440009">
-      <testcase name="testIndex" class="Tests\AppBundle\Controller\DefaultControllerTest" file="C:\Users\P3700559\Desktop\Firebase\Symfony\login\tests\AppBundle\Controller\DefaultControllerTest.php" line="9" assertions="2" time="0.440009"/>
-    </testsuite>
-  </testsuite>
-</testsuites>

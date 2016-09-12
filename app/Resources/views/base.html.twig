@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Guestbook">
+    <meta name="author" content="Ciprian Bucur">
     <link rel="icon" href="../../favicon.ico">
 
     <title>{% block title %}Guestbook{% endblock %}</title>
@@ -14,13 +14,6 @@
 		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 	{% endblock %}
-
-    {#
-		body {
-		  padding-top: 70px;
-		  margin-bottom: 60px;
-		}
-	#}
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -56,41 +49,30 @@
 					<button type="submit" class="btn btn-default">Search</button>
 				</form>
 			{% else %}
-			  <form class="navbar-form navbar-left" action="{{ path('login') }}" method="post">
-				<div class="form-group">
-					{#<input type="text" placeholder="Email" class="form-control" name="_username" value="{{ last_username }}">#}
-					<input type="text" placeholder="Email" class="form-control" name="_username" >
+				<form class="navbar-form navbar-left" action="{{ path('login') }}" method="post">
+					<div class="form-group">
+						{#<input type="text" placeholder="E-mail" class="form-control" name="_username" value="{{ last_username }}">#}
+						<input type="text" placeholder="E-mail" class="form-control" name="_username" >
+					</div>
+					<div class="form-group">
+						<input type="password" placeholder="Password" class="form-control" name="_password">
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<input type="checkbox" id="remember_me" name="_remember_me" checked />
+						<label for="remember_me">Keep me logged in</label>
+					</div>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					&nbsp;
+					<button type="submit" class="btn btn-success">Sign in</button>
+				</form>
+				<div class="navbar-form  navbar-right">
+					<a href="{{ path('register') }}" class="btn btn-primary">Create account</a>
 				</div>
-				<div class="form-group">
-					<input type="password" placeholder="Password" class="form-control" name="_password">
-				</div>
-				<div class="form-group">
-					<input type="checkbox" id="remember_me" name="_remember_me" checked />
-					<label for="remember_me">Keep me logged in</label>
-				</div>
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-				<button type="submit" class="btn btn-success">Sign in</button>
-			  </form>
-			  <form class="navbar-form navbar-right" action="{{ path('register') }}" method="post">
-				<button type="submit" class="btn btn-primary">Create account</button>
-			  </form>
 			{% endif %}
         </div>
       </div>
     </nav>
-				{#
-				   <form class="navbar-form navbar-left">
-						<div class="form-group">
-						  <input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					  </form>
-					  <ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
-						<li><a href="#">Link</a></li>
-						<li><a href="#">Link</a></li>
-					  </ul>
-				#}
     </head>
     <body>
         {% block body %}
@@ -98,70 +80,76 @@
 
       <div class="row">
         <div class="col-md-9">
-          <div class="jumbotron">
-            <h2>Guestbook</h2>
-            <p></p>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-xs-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-xs-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-xs-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-xs-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-          </div>
+			<h1 class="page-header">All messages: </h1>
+			<div class="row placeholders">
+				<div class="col-xs-6 col-lg-3 placeholder">
+					<h2>Heading</h2>
+					<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3 placeholder">
+					<h2>Heading</h2>
+					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> 
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3 placeholder">
+					<h2>Heading</h2>
+					<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3 placeholder">
+					<h2>Heading</h2>
+					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> 
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3">
+				  <h2>Heading</h2>
+				  <p>Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+				  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3">
+				  <h2>Heading</h2>
+				  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>            
+				  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3">
+				  <h2>Heading</h2>
+				  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3">
+				  <h2>Heading</h2>
+				  <p>Donec id elit non mi porta gravida at Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-6 col-lg-3">
+				  <h2>Heading</h2>
+				  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+
+			</div>
         </div>
 
         <div class="col-md-3 sidebar col-md-offset-9" id="sidebar">
-		<h2>Latest messages:</h2>
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div>
-		{# 
-		<ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-		#}
+		<h1>Latest messages:</h1>
+          	<div class="row">
+				<div class="col-xs-12 placeholder">
+					<h2>Heading</h2>
+					<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-12 placeholder">
+					<h2>Heading</h2>
+					<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-xs-12 placeholder">
+					<h2>Heading</h2>
+					<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				</div>
+			</div>
         </div>
       </div>
 	</div>
