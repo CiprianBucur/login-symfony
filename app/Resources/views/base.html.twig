@@ -21,118 +21,25 @@
 	{% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <span class="navbar-brand">&nbsp;</a>
-        </div>
-		<div id="navbar" class="navbar-collapse collapse">
-		<ul class="nav navbar-nav navbar-right">
-			<li class="active"><a href="/">View posts</a></li>
-			<li><a href="/create">Create post</a></li>
-			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-				<div class="navbar-form navbar-right">
-					<a class="btn btn-warning" href="/logout">Logout {{ app.user.username }}</a>
-				</div>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search...">
-					<button type="submit" class="btn btn-default">Search</button>
-				</form>
-			{% else %}
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Log in <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-					<li class="dropdown-header">Have an account?</li>
-					<li>
-					<form class="navbar-form" action="{{ path('login') }}" method="post">
-						<div class="form-group">
-							{#<input type="text" placeholder="E-mail" class="form-control" name="_username" value="{{ last_username }}">#}
-							<input type="text" placeholder="E-mail" class="form-control" name="_username" >
-						</div>
-						<div class="form-group">
-							<input type="password" placeholder="Password" class="form-control" name="_password">
-						</div>
-						&nbsp;
-						<div class="form-group">
-							<input type="checkbox" id="remember_me" name="_remember_me" checked />
-							<label for="remember_me">Keep me logged in</label>
-						</div>
-						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-						&nbsp;
-						<button type="submit" class="btn btn-success">Sign in</button>
-					</form>
-					</li>				
-					<li role="separator" class="divider"></li>
-					<li class="dropdown-header">New?</li>
-					<li>
-						<div class="navbar-form">
-						<a href="{{ path('register') }}" class="btn btn-primary">Create account</a>
-						</div>
-					</li>
-				  </ul>
-				</li>
-			{% endif %}
+	{% block nav %}
+	{% endblock %}
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				{% block limba %}
+                    <li class="active"><a href="/en">English</a></li>
+                    <li><a href="/ro">Română</a></li>
+                    <li><a href="/fr">Français </a></li>
+				{% endblock %}
+				</ul>
+			</li>
           </ul>
         </div>
       </div>
     </nav>
-  </head>
-  <body>
-{% block body %}
-   <div class="container">
-		<div class="row">
-			<div class="col-md-10">
-				<h1 class="page-header">10 posts found</h1>
-				{% for i in 1..5 %}
-					<div class="row">
-						<div class="col-md-12">
-							<p class="lead">by anonim</p>
-							<p class="text-muted">posted on 2016-05-05</p>
-							<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
-							<span>&nbsp;</span>
-							<a href="{{ i }}">read more...</a>
-							</p>
-							<a class="btn btn-primary pull-right" href="{{ i }}">Reply</a>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-md-12">
-							<p class="lead">by anonim</p>
-							<p class="text-muted">posted on 2016-05-05</p>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-							<span>&nbsp;</span>
-							<a href="{{ 11-i }}">read more...</a>
-							</p>
-							<a class="btn btn-primary pull-right" href="{{ 11-i }}">Reply</a>
-						</div>
-					</div>
-					<hr>
-				{% endfor %}
-			</div>		
-			<div class="col-md-2 sidebar col-md-offset-10" id="sidebar">
-				<h1>Latest posts</h1>
-				<div class="row">
-					<div class="col-xs-12 placeholder">
-						<h2>Heading</h2>
-						<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div>
-					<div class="col-xs-12 placeholder">
-						<h2>Heading</h2>
-						<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div>
-					<div class="col-xs-12 placeholder">
-						<h2>Heading</h2>
-						<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-{% endblock %}
+
+	{% block body %}
+	{% endblock %}
 		
 		<nav class="navbar navbar-default navbar-fixed-bottom">
 		  <div class="container">

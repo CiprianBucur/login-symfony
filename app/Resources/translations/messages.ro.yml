@@ -1,8 +1,21 @@
-View posts: Vizualizare
-Create post: Creare
+View posts: Vizualizare mesaje
+View details: Vizualizare mesaj
+Create post: Creare mesaj
+Latest posts: Ultimele mesaje
 Log in: Autentificare
 Language: Limba
 Create account: Înregistrare
 %count% posts found: Am găsit %count% mesaje
 posts found: mesaje găsite
-Symfony is great: E cel mai tare - ro YML
+Search: Căutare
+Have an account: Ai cont
+Password: Parola
+New: Nou
+Sign in: Autentificare
+Keep me logged in: Rămân autentificat
+Reply: Răspund
+read more: citește tot mesajul
+by: de
+posted on: la data de
+E-mail: E-mail
+Symfony is great: Ai ales limba română

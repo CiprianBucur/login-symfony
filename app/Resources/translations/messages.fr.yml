@@ -1,8 +1,21 @@
-View posts: Vizualizare
-Create post: Creare
-Log in: Autentificare
-Language: Limba
-Create account: Înregistrare
-%count% posts found: Am găsit %count% mesaje
-posts found: mesaje găsite
-Symfony is great: E cel mai tare - fr YML
+View posts: Voir les messages
+View details: Voir les détails
+Create post: Créer poste
+Latest posts: Derniers messages
+Log in: S'identifier
+Language: La langue
+Create account: Créer un compte
+%count% posts found: %count% postes trouvés
+posts found: messages trouvés
+Search: Chercher
+Have an account: Avoir un compte
+Password: Mot de passe
+New: Nouveau
+Sign in: Se connecter
+Keep me logged in: Rester connecté
+Reply: Répondre
+read more: Lire la suite
+by: par
+posted on: Posté sur
+E-mail: Adresse électronique
+Symfony is great: Symfony est grand

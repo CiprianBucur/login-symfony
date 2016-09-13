@@ -15,7 +15,7 @@ class DefaultController extends Controller
  */
 public function testAction(Request $request, $_locale="en")
 {
-		return $this->render('default/index.html.twig');
+		return $this->render('default/index.html.twig', array ('limba' => $request->getLocale()));
 }
 	
     /*

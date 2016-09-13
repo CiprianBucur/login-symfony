@@ -1,9 +1,131 @@
 {% extends 'base.html.twig' %}
+{% block limba %}
+	{% if limba == "ro" %}
+		<li><a href="/en">English</a></li>
+		<li class="active"><a href="/ro">Română</a></li>
+		<li><a href="/fr">Français </a></li>
+	{% elseif limba == "fr" %}
+		<li><a href="/en">English</a></li>
+		<li><a href="/ro">Română</a></li>
+		<li class="active"><a href="/fr">Français </a></li>
+	{% else %}
+		<li class="active"><a href="/en">English</a></li>
+		<li><a href="/ro">Română</a></li>
+		<li><a href="/fr">Français </a></li>
+	{%endif%}
+{% endblock %}
 
+
+{% block nav %}
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand">&nbsp;</a>
+        </div>
+		<div id="navbar" class="navbar-collapse collapse">
+		<ul class="nav navbar-nav navbar-right">
+			<li class="active"><a href="/">{% trans %} View posts {% endtrans %}</a></li>
+			<li><a href="/create">{% trans %}Create post{% endtrans %}</a></li>
+			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+				<div class="navbar-form navbar-right">
+					<a class="btn btn-warning" href="/logout">{% trans %}Logout{% endtrans %} {{ app.user.username }}</a>
+				</div>
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="{% trans %}Search{% endtrans %}...">
+					<button type="submit" class="btn btn-default">{% trans %}Search{% endtrans %}</button>
+				</form>
+			{% else %}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}Log in{% endtrans %} <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					<li class="dropdown-header">{% trans %}Have an account{% endtrans %}?</li>
+					<li>
+					<form class="navbar-form" action="{{ path('login') }}" method="post">
+						<div class="form-group">
+							{#<input type="text" placeholder="{% trans %}E-mail{% endtrans %}" class="form-control" name="_username" value="{{ last_username }}">#}
+							<input type="text" placeholder="{% trans %}E-mail{% endtrans %}" class="form-control" name="_username" >
+						</div>
+						<div class="form-group">
+							<input type="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control" name="_password">
+						</div>
+						&nbsp;
+						<div class="form-group">
+							<input type="checkbox" id="remember_me" name="_remember_me" checked />
+							<label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
+						</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						&nbsp;
+						<button type="submit" class="btn btn-success">{% trans %}Sign in{% endtrans %}</button>
+					</form>
+					</li>				
+					<li role="separator" class="divider"></li>
+					<li class="dropdown-header">{% trans %}New{% endtrans %}?</li>
+					<li>
+						<div class="navbar-form">
+						<a href="{{ path('register') }}" class="btn btn-primary">{% trans %}Create account{% endtrans %}</a>
+						</div>
+					</li>
+				  </ul>
+				</li>
+			{% endif %}
+{% endblock %}
 
 {% block body %}
-<p>{{ 'Symfony is great' | trans }}</p>
-<p>{% trans %} Symfony is great {% endtrans %}</p>
+{#	<p>{% trans %} Symfony is great {% endtrans %}</p> 
+{% set count = 10 %}
+{% trans %}%count% posts found{% endtrans %}#}
+	
+	
+	
+	
+	   <div class="container">
+		<div class="row">
+			<div class="col-md-10">
+				<h1 class="page-header">{% trans with {'%count%': '10'} %}%count% posts found{% endtrans %}</h1>
+				{% for i in 1..5 %}
+					<div class="row">
+						<div class="col-md-12">
+							<p class="lead">{% trans %}by{% endtrans %} anonim</p>
+							<p class="text-muted">{% trans %}posted on{% endtrans %} 2016-05-05</p>
+							<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
+							<span>&nbsp;</span>
+							<a href="details/{{ i }}">{% trans %}read more{% endtrans %}...</a>
+							</p>
+							<a class="btn btn-primary pull-right" href="reply/{{ i }}">{% trans %}Reply{% endtrans %}</a>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+							<p class="lead">{% trans %}by{% endtrans %} anonim</p>
+							<p class="text-muted">{% trans %}posted on{% endtrans %} 2016-05-05</p>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+							<span>&nbsp;</span>
+							<a href="details/{{ 11-i }}">{% trans %}read more{% endtrans %}...</a>
+							</p>
+							<a class="btn btn-primary pull-right" href="reply/{{ 11-i }}">{% trans %}Reply{% endtrans %}</a>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+			</div>		
+			<div class="col-md-2 sidebar col-md-offset-10" id="sidebar">
+				<h1>{% trans %}Latest posts{% endtrans %}</h1>
+				<div class="row">
+					{% for i in 1..3 %}
+						<div class="col-xs-12 placeholder">
+							<h2>Heading</h2>
+							<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+							<p><a class="btn btn-default" href="details/{{ i }}" role="button">{% trans %}View details{% endtrans %} &raquo;</a></p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
 {% endblock %}
 
 
