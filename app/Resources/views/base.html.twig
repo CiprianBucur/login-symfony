@@ -27,9 +27,20 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				{% block limba %}
-                    <li class="active"><a href="/en">English</a></li>
-                    <li><a href="/ro">Română</a></li>
-                    <li><a href="/fr">Français </a></li>
+					{% set prev = app.request.getRequestUri() | split('/') | last %}
+					{% if limba == "ro" %}
+						<li><a href="/en/{{ prev }}">English</a></li>
+						<li class="active"><a href="/ro/{{ prev }}">Română</a></li>
+						<li><a href="/fr/{{ prev }}">Français </a></li>
+					{% elseif limba == "fr" %}
+						<li><a href="/en/{{ prev }}">English</a></li>
+						<li><a href="/ro/{{ prev }}">Română</a></li>
+						<li class="active"><a href="/fr/{{ prev }}">Français </a></li>
+					{% else %}
+						<li class="active"><a href="/en/{{ prev }}">English</a></li>
+						<li><a href="/ro/{{ prev }}">Română</a></li>
+						<li><a href="/fr/{{ prev }}">Français </a></li>
+					{%endif%}
 				{% endblock %}
 				</ul>
 			</li>
@@ -39,19 +50,41 @@
     </nav>
 
 	{% block body %}
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<br><br><br>
+					{% for flash_message in app.session.flashbag.get('notice') %}
+						<div class="alert alert-success alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							{{flash_message}}
+						</div>
+					{% endfor %}
+
+					{% for flash_message in app.session.flashbag.get('error') %}
+						<div class="alert alert-danger alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							{{flash_message}}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 	{% endblock %}
 		
 		<nav class="navbar navbar-default navbar-fixed-bottom">
 		  <div class="container">
 			<div class="navbar-header">
-			  <span class="navbar-brand ">&copy; 2016 Company, Inc.
+			  <span class="navbar-brand">&copy; 2016 Company, Inc.
 			</div>
 		  </div>
 		</nav>
 	
         {% block javascripts %}
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-			<script src="js/bootstrap.min.js"></script>
+			<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 			<script>
 				$(document).ready(function () {
 				});

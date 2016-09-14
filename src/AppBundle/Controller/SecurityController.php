@@ -7,12 +7,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SecurityController extends Controller
-{
+class SecurityController extends Controller {
+
     /**
-     * @Route("/login", name="login")
+     * @Route("/{_locale}/login", name="login")
      */
-    public function loginAction(Request $request) {
+    public function loginAction(Request $request, $_locale="en") {
 		$authenticationUtils = $this->get('security.authentication_utils');
 		$error = $authenticationUtils->getLastAuthenticationError();
 		$lastUsername = $authenticationUtils->getLastUsername();
@@ -21,14 +21,14 @@ class SecurityController extends Controller
 			array(
 				'last_username' => $lastUsername,
 				'error'         => $error,
+				'limba' => $request->getLocale()
 		));
     }
 
-    /**
-     * @Route("/register", name="register")
-     */
-    public function registerAction(Request $request) {
-		return new Response('<html><body>Registration page</body></html>');
-    }
-
+	/**
+	 * @Route("/{_locale}/register", name="register")
+	 */
+	public function registerAction(Request $request, $_locale="en") {
+		return $this->render('default/register.html.twig', array ('limba' => $request->getLocale()));
+	}
 }

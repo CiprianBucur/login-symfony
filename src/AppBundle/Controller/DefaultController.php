@@ -8,39 +8,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-class DefaultController extends Controller
-{
-/**
- * @Route("/{_locale}", name="home_locale")
- */
-public function testAction(Request $request, $_locale="en")
-{
+class DefaultController extends Controller {
+
+	/**
+	 * @Route("/{_locale}", name="home_locale")
+	 */
+	public function indexAction(Request $request, $_locale="en") {
 		return $this->render('default/index.html.twig', array ('limba' => $request->getLocale()));
-}
+	}
 	
-    /*
-     * @Route("/", name="homepage")
-	 * 
-     *
-    public function indexAction(Request $request) {
-		
-		/*
-		//$locale = $request->getLocale();	var_dump($locale);
-		$request->setLocale("ro");
-		//$locale = $request->getLocale();	var_dump($locale);
-		
-		
-		$request->setLocale("gb");
-		return $this->render('default/index.html.twig');
-		
-		/*
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
-		*
-    }
-*/
+	/**
+	 * @Route("/{_locale}/create", name="create")
+	 */
+	public function createAction(Request $request, $_locale="en") {
+		return $this->render('default/create.html.twig', array ('limba' => $request->getLocale()));
+	}
+
 	/**
 	* @Security("has_role('ROLE_ADMIN')")
     * @Route("/admin", name="adminPage")

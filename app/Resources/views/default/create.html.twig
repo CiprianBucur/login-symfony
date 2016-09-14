@@ -31,7 +31,7 @@
 					<li>
 					<form class="navbar-form" action="{{ path('login') }}" method="post">
 						<div class="form-group">
-							<input type="text" placeholder="{% trans %}E-mail address{% endtrans %}" class="form-control" name="_username" >
+							<input type="text" placeholder="{% trans %}E-mailE-mail address{% endtrans %}" class="form-control" name="_username" >
 						</div>
 						<div class="form-group">
 							<input type="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control" name="_password">
@@ -58,31 +58,22 @@
 			{% endif %}
 {% endblock %}
 
-
-
 {% block body %}
 	{{ parent()}}
 
     <div class="container">
 		<br><br><br>
-		{% if error %}
-			<div class="alert alert-danger alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				{{ error.messageKey|trans(error.messageData, 'security') }}
-			</div>
-		{% endif %}
-		<form class="form-signin" action="{{ path('login') }}" method="post">
-			<h2 class="form-signin-heading">{% trans %}Please sign in{% endtrans %}</h2>
-			<input type="text" placeholder="{% trans %}E-mail address{% endtrans %}" class="form-control" name="_username" value="{{ last_username }}">
-			<input type="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control" name="_password">
-			<br>
-			<input type="checkbox" id="remember_me" name="_remember_me" checked />
-			<label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
+		<form>
+			<h2 class="form-signin-heading">{% trans %}Message{% endtrans %}:</h2>
+			<textarea id="message" cols="30" rows="10" class="form-control " placeholder="{% trans %}Message{% endtrans %}" required autofocus></textarea>
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 			<br>
-			<button type="submit" class="btn btn-success pull-right">{% trans %}Sign in{% endtrans %}</button>
+			<button class="btn btn-lg btn-primary pull-right" type="submit">{% trans %} Create post {% endtrans %}</button>
 		</form>
-					
-	</div>
+    </div>
+	
+	
+	
 {% endblock %}
+
+

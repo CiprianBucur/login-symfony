@@ -14,7 +14,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="/{{limba}}">{% trans %} View posts {% endtrans %}</a></li>
-			<li class="active"><a href="{{ path('create') }}">{% trans %}Create post{% endtrans %}</a></li>
+			<li><a href="{{ path('create') }}">{% trans %}Create post{% endtrans %}</a></li>
 			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 				<div class="navbar-form navbar-right">
 					<a class="btn btn-warning" href="/logout">{% trans %}Logout{% endtrans %} {{ app.user.username }}</a>
@@ -24,7 +24,7 @@
 					<button type="submit" class="btn btn-default">{% trans %}Search{% endtrans %}</button>
 				</form>
 			{% else %}
-				<li class="dropdown">
+				<li class="active dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}Log in{% endtrans %} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 					<li class="dropdown-header">{% trans %}Have an account{% endtrans %}?</li>
@@ -58,31 +58,21 @@
 			{% endif %}
 {% endblock %}
 
-
-
 {% block body %}
 	{{ parent()}}
 
     <div class="container">
 		<br><br><br>
-		{% if error %}
-			<div class="alert alert-danger alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				{{ error.messageKey|trans(error.messageData, 'security') }}
-			</div>
-		{% endif %}
-		<form class="form-signin" action="{{ path('login') }}" method="post">
-			<h2 class="form-signin-heading">{% trans %}Please sign in{% endtrans %}</h2>
-			<input type="text" placeholder="{% trans %}E-mail address{% endtrans %}" class="form-control" name="_username" value="{{ last_username }}">
-			<input type="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control" name="_password">
-			<br>
-			<input type="checkbox" id="remember_me" name="_remember_me" checked />
-			<label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
+		<form class="form-signin">
+			<h2 class="form-signin-heading">{% trans %}Sign in{% endtrans %}</h2>
+			<input type="text" id="inputName" class="form-control" placeholder="{% trans %}Name{% endtrans %}" required autofocus>
+			<input type="email" id="inputEmail" class="form-control" placeholder="{% trans %}E-mail address{% endtrans %}" required>
+			<input type="password" id="inputPassword" class="form-control" placeholder="{% trans %}Password{% endtrans %}" required>
+			<input type="password" id="inputPassword2" class="form-control" placeholder="{% trans %}Verify password{% endtrans %}" required>
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 			<br>
-			<button type="submit" class="btn btn-success pull-right">{% trans %}Sign in{% endtrans %}</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">{% trans %} Create account {% endtrans %}</button>
 		</form>
-					
-	</div>
+    </div>
 {% endblock %}
+

@@ -1,8 +1,8 @@
 View posts: Voir les messages
 View details: Voir les détails
+Message: Le message
 Create post: Créer poste
 Latest posts: Derniers messages
-Log in: S'identifier
 Language: La langue
 Create account: Créer un compte
 %count% posts found: %count% postes trouvés
@@ -10,12 +10,18 @@ posts found: messages trouvés
 Search: Chercher
 Have an account: Avoir un compte
 Password: Mot de passe
+Verify password: Vérifier mot de passe
 New: Nouveau
+Name: Nom
+Log in: S'identifier
+Logout: Déconnecter
 Sign in: Se connecter
+Please sign in: S'il vous plaît vous connecter
 Keep me logged in: Rester connecté
 Reply: Répondre
 read more: Lire la suite
 by: par
 posted on: Posté sur
 E-mail: Adresse électronique
+E-mail address: Adresse électronique
 Symfony is great: Symfony est grand
