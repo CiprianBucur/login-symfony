@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Guestbook - {% trans %}Create post{% endtrans %} {% endblock %}
+
 {% block stylesheets %}
 	{{ parent()}}
-	<link href="{{ asset('css/signin.css') }}" rel="stylesheet">
+
+	<link href="{{ asset('bundles/app/css/signin.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block nav %}
    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <span class="navbar-brand">&nbsp;</a>
         </div>
 		<div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
@@ -65,15 +67,14 @@
 		<br><br><br>
 		<form>
 			<h2 class="form-signin-heading">{% trans %}Message{% endtrans %}:</h2>
-			<textarea id="message" cols="30" rows="10" class="form-control " placeholder="{% trans %}Message{% endtrans %}" required autofocus></textarea>
+			<textarea id="message" cols="30" rows="10" class="form-control " placeholder="{% trans %}Message{% endtrans %}..." required autofocus></textarea>
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 			<br>
 			<button class="btn btn-lg btn-primary pull-right" type="submit">{% trans %} Create post {% endtrans %}</button>
 		</form>
     </div>
-	
-	
-	
 {% endblock %}
 
-
+{% block javascripts %}
+    {{ parent()}}
+{% endblock %}

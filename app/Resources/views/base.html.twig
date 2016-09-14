@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Guestbook">
     <meta name="author" content="Ciprian Bucur">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>{% block title %}Guestbook{% endblock %}</title>
-	
+
 	{% block stylesheets %}
-		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+		<link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('bundles/app/css/dashboard.css') }}" rel="stylesheet">
 		<style>
 			body {
 				margin-bottom: 60px;
@@ -73,22 +72,38 @@
 			</div>
 		</div>
 	{% endblock %}
-		
-		<nav class="navbar navbar-default navbar-fixed-bottom">
-		  <div class="container">
-			<div class="navbar-header">
-			  <span class="navbar-brand">&copy; 2016 Company, Inc.
-			</div>
-		  </div>
-		</nav>
-	
-        {% block javascripts %}
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-			<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-			<script>
-				$(document).ready(function () {
-				});
-			</script>
-		{% endblock %}
+
+	<div class="bb-alert alert-info" style="display: none;">
+		<span></span>
+	</div>
+
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container">
+		<div class="navbar-header">
+		  <span class="navbar-brand">Copyright &copy; 2016, {% trans %}All Rights Reserved{% endtrans %}</span>
+		</div>
+	  </div>
+	</nav>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/bootbox.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/example.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            setTimeout(function() {
+                $(".alert").fadeToggle(1000);
+            }, 5000);
+
+            $(function () {
+                Example.init({
+                    "selector": ".bb-alert"
+                });
+            });
+
+        });
+    </script>
+{% endblock %}
     </body>
 </html>

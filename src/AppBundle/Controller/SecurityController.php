@@ -13,16 +13,22 @@ class SecurityController extends Controller {
      * @Route("/{_locale}/login", name="login")
      */
     public function loginAction(Request $request, $_locale="en") {
-		$authenticationUtils = $this->get('security.authentication_utils');
-		$error = $authenticationUtils->getLastAuthenticationError();
-		$lastUsername = $authenticationUtils->getLastUsername();
 
-		return $this->render('AppBundle:Security:login.html.twig',
-			array(
-				'last_username' => $lastUsername,
-				'error'         => $error,
-				'limba' => $request->getLocale()
-		));
+        if($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->render('default/index.html.twig', array ('limba' => $request->getLocale()));
+        }
+        else {
+            $authenticationUtils = $this->get('security.authentication_utils');
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+
+            return $this->render('AppBundle:Security:login.html.twig',
+                array(
+                    'last_username' => $lastUsername,
+                    'error' => $error,
+                    'limba' => $request->getLocale()
+                ));
+        }
     }
 
 	/**

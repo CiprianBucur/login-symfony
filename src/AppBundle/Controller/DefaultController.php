@@ -21,7 +21,21 @@ class DefaultController extends Controller {
 	 * @Route("/{_locale}/create", name="create")
 	 */
 	public function createAction(Request $request, $_locale="en") {
-		return $this->render('default/create.html.twig', array ('limba' => $request->getLocale()));
+        if(!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $translated = $this->get('translator')->trans('You must be logged in before posting') . ".";
+            return $this->render('@App/Security/login.html.twig', array (
+                'limba' => $request->getLocale(),
+                'error' => array(
+                    'messageKey' => $translated,
+                    'messageData' => array (
+                        'security' => $translated,
+                    )
+                ),
+                'last_username' => ''));
+        }
+        else {
+            return $this->render('default/create.html.twig', array('limba' => $request->getLocale()));
+        }
 	}
 
 	/**
@@ -37,7 +51,6 @@ class DefaultController extends Controller {
     * @Route("/ascuns", name="adminAscuns")
 	*/
 	public function ascunsAction() {
-
 		if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			return new Response('<html><body>Foarte bine!</body></html>');
 		}

@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
 {% block limba %}
 	{% if limba == "ro" %}
 		<li><a href="/en">English</a></li>
@@ -15,12 +20,10 @@
 	{%endif%}
 {% endblock %}
 
-
 {% block nav %}
    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <span class="navbar-brand">&nbsp;</a>
         </div>
 		<div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
@@ -107,8 +110,8 @@
 				<h1>{% trans %}Latest posts{% endtrans %}</h1>
 				<div class="row">
 					{% for i in 1..3 %}
-						<div class="col-xs-12 placeholder">
-							<h2>Heading</h2>
+						<div class="col-xs-12">
+							<hr>
 							<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
 							<p><a class="btn btn-default" href="details/{{ i }}" role="button">{% trans %}View details{% endtrans %} &raquo;</a></p>
 						</div>
@@ -117,40 +120,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
 {% endblock %}
 
-{% block stylesheets %}
-{{ parent() }}
+{% block javascripts %}
+	{{ parent()}}
 {% endblock %}
-
-{#
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		<p>Hi there: {{ app.user.username }}</p>
-		<a href="/logout">Logout</a>
-	{% else %}
-		<a href="/login">Login</a>
-	{% endif %}
-
-	{% if is_granted('ROLE_ADMIN') %}
-		<hr>
-		<a href="/ascuns">pagina ascunsa</a>
-	{% endif %}
-	{% if is_granted('ROLE_USER') %}
-		<hr>
-		<p><a href="/user">User page</a></p>
-		<p><a href="/admin">Admin page</a></p>
-	{% endif %}
-
-	<p>{% trans %} Symfony is great {% endtrans %}</p> 
-{% set count = 10 %}
-{% trans %}%count% posts found{% endtrans %}
-
-#}
-
-
-
-
-
