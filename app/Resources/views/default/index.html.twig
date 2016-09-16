@@ -56,6 +56,7 @@
 							<label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
 						</div>
 						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<input type="hidden" name="_target_path" value="{{ app.request.getRequestUri() }}" />
 						&nbsp;
 						<button type="submit" class="btn btn-success">{% trans %}Sign in{% endtrans %}</button>
 					</form>

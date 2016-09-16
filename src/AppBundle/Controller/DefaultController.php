@@ -11,9 +11,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class DefaultController extends Controller {
 
 	/**
+	 * @Route("/", name="home")
+	 */
+	public function indexHome(Request $request) {
+		return $this->redirectToRoute('home_locale');
+	}
+
+	/**
 	 * @Route("/{_locale}", name="home_locale")
 	 */
-	public function indexAction(Request $request, $_locale="en") {
+	public function indexAction(Request $request, $_locale) {
 		return $this->render('default/index.html.twig', array ('limba' => $request->getLocale()));
 	}
 	
